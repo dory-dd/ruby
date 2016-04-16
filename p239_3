@@ -1,0 +1,7 @@
+def dice
+	100.times do
+		atai = Random.rand(6)
+		puts atai + 1
+	end
+end
+dice

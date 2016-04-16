@@ -1,0 +1,6 @@
+def cels_to_fahr
+	fahr = ARGV[0].to_i
+	cels = fahr * 9 / 5 +32
+	puts "摂氏#{fahr}度は華氏#{cels}度です。"
+end
+cels_to_fahr

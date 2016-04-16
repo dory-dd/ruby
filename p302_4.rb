@@ -1,0 +1,11 @@
+def count_chara
+	str = %Q{Ruby is an object oriented lungage}.downcase
+	count = Hash.new(0)
+	str.each_char do|c|
+		count[c] +=1
+	end
+	count.keys.sort.each do|c|
+		printf("'%s': %s\n", c, "*" * count[c])
+	end
+end
+count_chara

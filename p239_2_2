@@ -1,0 +1,8 @@
+def fahr_to_cels_list
+	100.times do|fahr|
+		fahr += 1
+		cels = fahr *9 /5 +32
+		puts "摂氏#{fahr} は 華氏#{cels} "
+	end
+end
+fahr_to_cels_list
