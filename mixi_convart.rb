@@ -1,6 +1,11 @@
 class Mixi_to_markdown
 	require 'rexml/document'
 	@mixi_xml = "/Users/hitokui/Lab/mixi_export/adiary.xml"
+	@post_path = "/Users/hitokui/Lab/dory-dd.github.io/_posts/"
+
+	def initialize(filename)
+	#いろいろ
+	end
 
 	def make_filenames(date,title)
 		filename = 	date + "-"
@@ -10,12 +15,12 @@ class Mixi_to_markdown
 
 	def make_header(title,date,category = "mixi",body)
 	   header =  "---" + "\n"
-		 header = +"layout: 		post" + "\n"
-		 header = +"title:  		\"#{title}\"" + "\n"
-		 header = +"date:   		#{date} 00:00:00 +0900" + "\n"
-		 header = +"categories: #{category}" + "\n"
-		 header = +"---" + "\n"
-	puts header
+		 header += +"layout: 		post" + "\n"
+		 header += +"title:  		\"#{title}\"" + "\n"
+		 header += +"date:   		#{date} 00:00:00 +0900" + "\n"
+		 header += +"categories:             #{category}" + "\n"
+		 header += +"---" + "\n"
+	#puts header
 	end
 
 	def make_bodies(body)
@@ -33,5 +38,12 @@ class Mixi_to_markdown
 	end
 #read_xml
 
+	def make_markdown
+			writename = @post_path.to_s + "MarkdownWriteTest.markdown"
+			File.write(writename,"Hello,markdown")
+			#puts writename.class
+	end
+
 end
-Mixi_to_markdown.make_header
+ababa = Mixi_to_markdown.new("fike")
+ababa.make_markdown()
