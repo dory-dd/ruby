@@ -39,11 +39,10 @@ class Mixi_to_markdown
 #read_xml
 
 	def make_markdown
-			File.write(post_path,bodies)
+			File.write(@post_path,@bodies)
 	end
-
-puts read_xml
 
 end
 
-Mixi_to_markdown.new("")
+ababa = Mixi_to_markdown.new("")
+puts ababa.read_xml
