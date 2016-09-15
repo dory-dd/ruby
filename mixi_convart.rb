@@ -2,7 +2,7 @@ class Mixi_to_markdown
 	require 'rexml/document'
 	Mixi_xml = "/Users/hitokui/Lab/mixi_export/adiary.xml"
 	Post_path = "/Users/hitokui/Lab/dory-dd.github.io/_posts/"
-
+	
 	def make_filenames(date,title)
 		filename =  +date + "-"
 		filename += +title
@@ -16,7 +16,6 @@ class Mixi_to_markdown
 		 header += +"date:   		#{date} 00:00:00 +0900" + "\n"
 		 header += +"categories:             #{category}" + "\n"
 		 header += +"---" + "\n"
-	#puts header
 	end
 
 	def make_bodies(body)
@@ -24,28 +23,24 @@ class Mixi_to_markdown
 		bodies = body
 	end
 
-	def read_xml
-		bodies = Hash.new
+	def make_markdown
 		doc = REXML::Document.new(open(Mixi_xml))
 		doc.elements.each("/diary/day") do |day|
-			bodies["title"] = day.attributes['title']
-			bodies["date"] = day.attributes['date']
-			bodies["body"] = day.elements['body'].text
-			#test
-			#return make_filenames(date,title)
-			return bodies
-		end
-	end
-#read_xml
-
-	def make_markdown
+			title = day.attributes['title']
+			date = day.attributes['date']
+			body = day.elements['body'].text
+			#escape shash etc
+			title = title.gsub(/\//){|word|word.slice!(1)}
+			#実行部（別のメソッドにしたほうがいいのかな・・）
 			file_path = Post_path + make_filenames(date,title)
-			write_body = make_header(title,date) + body
+			write_body = make_header(title,date) + make_bodies(body)
+
 			File.write(file_path,write_body)
+		end
 	end
 
 end
 
 mixi = Mixi_to_markdown.new
-#title = mixi.read_xml
 mixi.make_markdown
+puts 'ls -l /Users/hitokui/Lab/dory-dd.github.io/_posts/'
